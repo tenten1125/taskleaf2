@@ -3,7 +3,9 @@ class Admin::UsersController < ApplicationController
     @users = User.all
   end
 
-  def show; end
+  def show
+    @user = User.find(params[:id])
+  end
 
   def new
     @user = User.new
@@ -25,7 +27,7 @@ class Admin::UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      redirect_to @user, notice: "ユーザー「#{@user.name}」の情報を更新しました。"
+      redirect_to admin_user_path(@user), notice: "ユーザー「#{@user.name}」の情報を更新しました。"
     else
       render :edit
     end
